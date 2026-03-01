@@ -1,11 +1,11 @@
 import React from 'react';
+import { API_URL } from './config';
 
 export default function Signup() {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-import { API_URL } from './config';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
