@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -27,4 +28,11 @@ module.exports = {
     static: path.resolve(__dirname, 'public'),
     historyApiFallback: true,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        REACT_APP_API_URL: JSON.stringify(process.env.REACT_APP_API_URL || ''),
+      },
+    }),
+  ],
 };
