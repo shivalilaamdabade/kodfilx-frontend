@@ -17,10 +17,16 @@ export default function Login({ setUser }) {
       });
       if (res.ok) {
         const data = await res.json();
+        console.log('Login successful:', data);
         // Save user info to localStorage and update parent state
         const userData = { username };
         localStorage.setItem('kodflix_user', JSON.stringify(userData));
+        
+        // Update state first, then force a reload to ensure clean navigation
         setUser(userData);
+        
+        // Force a full page reload to ensure state is properly initialized
+        window.location.href = 'https://kodflix-app-one.vercel.app/';
       } else {
         const data = await res.json();
         alert('Error: ' + (data.message || res.status));
