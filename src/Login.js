@@ -32,8 +32,21 @@ export default function Login() {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Sign In</h2>
-      <input className="input" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input className="input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input 
+        className="input" 
+        placeholder="Username or Email" 
+        value={username} 
+        onChange={(e) => setUsername(e.target.value)} 
+        required
+      />
+      <input 
+        className="input" 
+        type="password" 
+        placeholder="Password" 
+        value={password} 
+        onChange={(e) => setPassword(e.target.value)} 
+        required
+      />
       <button className="btn" type="submit" disabled={loading}>{loading ? 'Signing in...' : 'Sign In'}</button>
       <div className="small">This page is protected — use your account to continue.</div>
     </form>

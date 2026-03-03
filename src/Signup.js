@@ -34,9 +34,30 @@ export default function Signup() {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Create Account</h2>
-      <input className="input" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input className="input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input 
+        className="input" 
+        placeholder="Username" 
+        value={username} 
+        onChange={(e) => setUsername(e.target.value)} 
+        required
+      />
+      <input 
+        className="input" 
+        type="email" 
+        placeholder="Email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        required
+      />
+      <input 
+        className="input" 
+        type="password" 
+        placeholder="Password" 
+        value={password} 
+        onChange={(e) => setPassword(e.target.value)} 
+        minLength="6"
+        required
+      />
       <button className="btn" type="submit" disabled={loading}>{loading ? 'Creating...' : 'Get Started'}</button>
       <div className="small">By creating an account you agree to our Terms and Privacy.</div>
     </form>
