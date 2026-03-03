@@ -1,7 +1,7 @@
 import React from 'react';
 import { API_URL } from './config';
 
-export default function Signup() {
+export default function Signup({ onSignupSuccess }) {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -18,7 +18,29 @@ export default function Signup() {
         body: JSON.stringify({ username, email, password }),
       });
       if (res.status === 201) {
-        alert('Created! You can now log in.');
+        // Signup successful - now automatically log in
+        try {
+          const loginRes = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+          });
+          
+          if (loginRes.ok) {
+            const userData = { username };
+            localStorage.setItem('kodflix_user', JSON.stringify(userData));
+            console.log('Signup and auto-login successful');
+            // Trigger parent to show home page
+            if (onSignupSuccess) {
+              onSignupSuccess(userData);
+            }
+          } else {
+            alert('Account created! Please log in.');
+          }
+        } catch (loginErr) {
+          console.error('Auto-login failed after signup', loginErr);
+          alert('Account created! Please log in.');
+        }
       } else {
         const data = await res.json();
         alert('Error: ' + (data.message || res.status));
