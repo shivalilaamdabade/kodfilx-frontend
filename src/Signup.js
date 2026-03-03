@@ -6,6 +6,10 @@ export default function Signup() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  React.useEffect(() => {
+    console.log('Signup component using API_URL =', API_URL);
+  }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

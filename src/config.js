@@ -9,3 +9,7 @@ export const API_URL = (typeof process !== 'undefined' && process.env && process
   : (typeof window !== 'undefined' && window.location.hostname !== 'localhost'
       ? RENDER_BACKEND
       : 'http://localhost:3001');
+
+// expose for debugging in console
+console.log('Configured API_URL =', API_URL);
+
