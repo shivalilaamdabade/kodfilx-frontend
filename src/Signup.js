@@ -5,14 +5,12 @@ export default function Signup() {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-
-  React.useEffect(() => {
-    console.log('Signup component using API_URL =', API_URL);
-  }, []);
+  const [loading, setLoading] = React.useState(false);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch(`${API_URL}/signup`, {
         method: 'POST',
@@ -28,16 +26,19 @@ export default function Signup() {
     } catch (networkErr) {
       console.error('Network error during signup', networkErr);
       alert('Network error: could not contact server.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: 300 }}>
-      <h2>Signup</h2>
-      <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Sign Up</button>
+    <form onSubmit={handleSubmit}>
+      <h2>Create Account</h2>
+      <input className="input" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input className="input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button className="btn" type="submit" disabled={loading}>{loading ? 'Creating...' : 'Get Started'}</button>
+      <div className="small">By creating an account you agree to our Terms and Privacy.</div>
     </form>
   );
 }

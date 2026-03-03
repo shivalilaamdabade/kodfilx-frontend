@@ -1,0 +1,51 @@
+/* Netflix-like theme styles */
+:root{
+  --bg-color: #141414;
+  --card-bg: rgba(0,0,0,0.65);
+  --accent: #e50914;
+  --muted: #b3b3b3;
+}
+html,body,#root{height:100%;}
+body{
+  margin:0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: radial-gradient(ellipse at top left, rgba(255,255,255,0.02), transparent 20%), linear-gradient(180deg,#141414 0%, #000 100%);
+  color: #fff;
+}
+.hero{
+  min-height:100vh;
+  background-image: url('https://images.unsplash.com/photo-1517604931442-7d5d2f6f2f7b?auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.overlay{
+  position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,20,20,0.6), rgba(0,0,0,0.8));
+}
+.container{
+  position:relative; z-index:2; width:100%; max-width:980px; padding:40px;
+  display:flex; align-items:center; justify-content:flex-end;
+}
+.card{
+  width:380px; background:var(--card-bg); padding:48px 32px; border-radius:6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.logo{position:absolute; left:40px; top:30px; font-weight:700; font-size:28px; color:var(--accent);}
+.card h2{margin:0 0 24px 0; font-size:26px}
+.input{
+  width:100%; padding:12px 14px; margin-bottom:14px; border-radius:4px; border:0; background:#222; color:#fff; outline:none;
+}
+.small{font-size:13px;color:var(--muted); margin-top:12px}
+.btn{
+  width:100%; background:var(--accent); color:white; padding:12px 14px; border-radius:4px; border:0; font-weight:700; cursor:pointer; margin-top:8px;
+}
+.muted-link{color:var(--muted); font-size:13px}
+.center-note{margin-top:18px; text-align:center; color:var(--muted); font-size:13px}
+
+@media (max-width:720px){
+  .container{padding:20px}
+  .card{width:320px; padding:28px}
+  .logo{left:20px}
+}
