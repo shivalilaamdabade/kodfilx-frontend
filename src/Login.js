@@ -1,7 +1,7 @@
 import React from 'react';
 import { API_URL } from './config';
 
-export default function Login() {
+export default function Login({ setUser }) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -16,7 +16,11 @@ export default function Login() {
         body: JSON.stringify({ username, password }),
       });
       if (res.ok) {
-        window.location.href = '/';
+        const data = await res.json();
+        // Save user info to localStorage and update parent state
+        const userData = { username };
+        localStorage.setItem('kodflix_user', JSON.stringify(userData));
+        setUser(userData);
       } else {
         const data = await res.json();
         alert('Error: ' + (data.message || res.status));
