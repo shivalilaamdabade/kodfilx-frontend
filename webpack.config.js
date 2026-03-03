@@ -4,7 +4,8 @@ const webpack = require('webpack');
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    // write the built bundle directly into public so deployments serve it at /
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
   module: {
@@ -27,6 +28,12 @@ module.exports = {
   devServer: {
     static: path.resolve(__dirname, 'public'),
     historyApiFallback: true,
+    port: 3000,
+    // proxy API requests to backend to avoid CORS during development
+    proxy: {
+      '/signup': 'http://localhost:3001',
+      '/login': 'http://localhost:3001',
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
