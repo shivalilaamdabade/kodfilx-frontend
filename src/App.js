@@ -52,7 +52,13 @@ function App() {
       <div className="logo">Kodflix</div>
       <div className="container">
         <div className="card">
-          {page === 'login' ? <Login setUser={setUser} /> : <Signup />}
+          {page === 'login' ? (
+            <Login setUser={setUser} />
+          ) : (
+            <Signup onSignupSuccess={(userData) => {
+              setUser(userData);
+            }} />
+          )}
           <div className="center-note">
             {page === 'login' ? (
               <span className="muted-link">New here? <button className="muted-link" onClick={() => setPage('signup')}>Create an account</button></span>

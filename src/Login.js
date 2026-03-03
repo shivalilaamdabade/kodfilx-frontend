@@ -22,11 +22,8 @@ export default function Login({ setUser }) {
         const userData = { username };
         localStorage.setItem('kodflix_user', JSON.stringify(userData));
         
-        // Update state first, then force a reload to ensure clean navigation
+        // Update state to trigger home page display
         setUser(userData);
-        
-        // Force a full page reload to ensure state is properly initialized
-        window.location.href = 'https://kodflix-app-one.vercel.app/';
       } else {
         const data = await res.json();
         alert('Error: ' + (data.message || res.status));
