@@ -9,16 +9,21 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${API_URL}/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, email, password }),
-    });
-    if (res.status === 201) {
-      alert('Created! You can now log in.');
-    } else {
-      const data = await res.json();
-      alert('Error: ' + (data.message || res.status));
+    try {
+      const res = await fetch(`${API_URL}/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password }),
+      });
+      if (res.status === 201) {
+        alert('Created! You can now log in.');
+      } else {
+        const data = await res.json();
+        alert('Error: ' + (data.message || res.status));
+      }
+    } catch (networkErr) {
+      console.error('Network error during signup', networkErr);
+      alert('Network error: could not contact server.');
     }
   };
 

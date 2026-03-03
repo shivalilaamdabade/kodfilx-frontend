@@ -18,6 +18,10 @@ This is the React-based frontend for Kodflix with authentication.
    ```
 3. Start development server: `npm start` or `yarn start`
 
+## Production build
+
+Run `npm run build` to compile the app. The resulting `bundle.js` will be written into `public/`, which is what your deployment platform (e.g. Vercel) will serve at `/bundle.js`.
+
 ## Deployment
 
 Push this repo to GitHub and connect to Vercel for automatic deployments.
